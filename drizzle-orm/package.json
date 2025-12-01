@@ -56,12 +56,10 @@
 		"@planetscale/database": ">=1.13",
 		"@prisma/client": "*",
 		"@tidbcloud/serverless": "*",
-		"@types/better-sqlite3": "*",
 		"@types/pg": "*",
 		"@types/sql.js": "*",
 		"@vercel/postgres": ">=0.8.0",
 		"@xata.io/client": "*",
-		"better-sqlite3": ">=7",
 		"bun-types": "*",
 		"expo-sqlite": ">=14.0.0",
 		"knex": "*",
@@ -69,6 +67,7 @@
 		"mysql2": ">=2",
 		"pg": ">=8",
 		"postgres": ">=3",
+		"snowflake-sdk": ">=1.6.0",
 		"sql.js": ">=1",
 		"sqlite3": ">=5",
 		"gel": ">=2",
@@ -82,12 +81,6 @@
 			"optional": true
 		},
 		"@xata.io/client": {
-			"optional": true
-		},
-		"better-sqlite3": {
-			"optional": true
-		},
-		"@types/better-sqlite3": {
 			"optional": true
 		},
 		"sqlite3": {
@@ -161,6 +154,9 @@
 		},
 		"@upstash/redis": {
 			"optional": true
+		},
+		"snowflake-sdk": {
+			"optional": true
 		}
 	},
 	"devDependencies": {
@@ -177,7 +173,6 @@
 		"@planetscale/database": "^1.16.0",
 		"@prisma/client": "5.14.0",
 		"@tidbcloud/serverless": "^0.1.1",
-		"@types/better-sqlite3": "^7.6.12",
 		"@types/node": "^20.2.5",
 		"@types/pg": "^8.10.1",
 		"@types/react": "^18.2.45",
@@ -185,7 +180,6 @@
 		"@upstash/redis": "^1.34.3",
 		"@vercel/postgres": "^0.8.0",
 		"@xata.io/client": "^0.29.3",
-		"better-sqlite3": "^11.9.1",
 		"bun-types": "^1.2.0",
 		"cpy": "^10.1.0",
 		"expo-sqlite": "^14.0.0",
