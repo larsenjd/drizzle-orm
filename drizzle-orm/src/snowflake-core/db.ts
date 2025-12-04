@@ -2,6 +2,7 @@ import { entityKind } from '~/entity.ts';
 import type { ExtractTablesWithRelations, RelationalSchemaConfig, TablesRelationalConfig } from '~/relations.ts';
 import type { SQL } from '~/sql/sql.ts';
 import type { DrizzleTypeError } from '~/utils.ts';
+import type { SnowflakeSession } from './session';
 
 // Forward declare types to avoid circular dependency
 export interface SnowflakeQueryResultHKT {
@@ -12,19 +13,6 @@ export interface SnowflakeQueryResultHKT {
 
 export interface SnowflakeTransactionConfig {
 	isolationLevel?: 'read committed';
-}
-
-// These will be properly typed in session.ts
-export interface SnowflakeSessionBase<
-	TQueryResult extends SnowflakeQueryResultHKT = SnowflakeQueryResultHKT,
-	TFullSchema extends Record<string, unknown> = Record<string, never>,
-	TSchema extends TablesRelationalConfig = Record<string, never>,
-> {
-	execute<T>(query: SQL): Promise<T>;
-	transaction<T>(
-		transaction: (tx: any) => Promise<T>,
-		config?: SnowflakeTransactionConfig,
-	): Promise<T>;
 }
 
 export class SnowflakeDatabase<
@@ -38,7 +26,7 @@ export class SnowflakeDatabase<
 		readonly schema: TSchema | undefined;
 		readonly fullSchema: TFullSchema;
 		readonly tableNamesMap: Record<string, string>;
-		readonly session: SnowflakeSessionBase<TQueryResult, TFullSchema, TSchema>;
+		readonly session: SnowflakeSession<TQueryResult, TFullSchema, TSchema>;
 	};
 
 	// TODO: Add relational query support
@@ -50,7 +38,7 @@ export class SnowflakeDatabase<
 		/** @internal */
 		readonly dialect: any, // SnowflakeDialect - typed as any to break circular dep
 		/** @internal */
-		readonly session: SnowflakeSessionBase<any, any, any>,
+		readonly session: SnowflakeSession<any, any, any>,
 		schema: RelationalSchemaConfig<TSchema> | undefined,
 	) {
 		this._ = schema
